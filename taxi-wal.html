@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taxi Wal — Chauffeur privé & Navettes aéroport | La Louvière, Centre</title>
+<meta name="description" content="Taxi Wal La Louvière : chauffeur privé, navette aéroport, transport PMR, entreprises et événements. La Louvière, Manage, Binche, Morlanwelz, Le Rœulx. Réservation rapide, 24h/24.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111111;
+    --ink-light:#242424;
+    --paper:#F7F5EF;
+    --paper-dim:#ECE9E2;
+    --brass:#B3141B;
+    --brass-light:#D6353C;
+    --green:#1E6B3C;
+    --green-light:#2C8A4E;
+    --slate:#5B5B5B;
+    --line:#DEDACE;
+    --ok:#1E6B3C;
+    --radius:10px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;line-height:1.15;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  ul{list-style:none;}
+
+  /* ---------- TOP WRAP (barre WhatsApp + header, collés en haut) ---------- */
+  #site-top{position:sticky;top:0;z-index:60;}
+
+  /* ---------- BARRE WHATSAPP ---------- */
+  #wa-topbar{
+    background:var(--green);color:#fff;text-align:center;
+    padding:10px 16px;font-size:.86rem;font-weight:600;
+  }
+  #wa-topbar a{display:inline-flex;align-items:center;gap:10px;justify-content:center;color:#fff;}
+  .wa-icon{
+    width:30px;height:30px;flex-shrink:0;display:block;
+    animation:wa-bounce 1.6s infinite;
+  }
+  .wa-icon-lg{width:26px;height:26px;}
+  @keyframes wa-bounce{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.18);}
+  }
+  .wa-pulse-ring{
+    position:relative;display:inline-flex;
+  }
+  .wa-pulse-ring::before{
+    content:"";position:absolute;inset:-6px;border-radius:50%;
+    background:rgba(255,255,255,.35);
+    animation:wa-ring 1.6s infinite;
+  }
+  @keyframes wa-ring{
+    0%{transform:scale(.7);opacity:.9;}
+    100%{transform:scale(1.7);opacity:0;}
+  }
+  .btn-whatsapp{background:var(--green);color:#fff;}
+  .btn-whatsapp:hover{background:var(--green-light);}
+
+  /* ---------- BADGE NAVETTE AÉROPORT ---------- */
+  .navette-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--brass);color:#fff;
+    padding:9px 16px;border-radius:999px;font-weight:700;font-size:.85rem;
+    cursor:pointer;border:none;white-space:nowrap;
+  }
+  .navette-badge .plane{display:inline-block;animation:plane-fly 1.8s ease-in-out infinite;}
+  @keyframes plane-fly{
+    0%,100%{transform:translate(0,0) rotate(0deg);}
+    50%{transform:translate(3px,-3px) rotate(8deg);}
+  }
+
+  /* ---------- CARTES CLIQUABLES (services / flotte) ---------- */
+  .service-card, .fleet-card{cursor:pointer;}
+  .fleet-card:hover{border-color:var(--brass);transform:translateY(-3px);transition:border-color .15s, transform .15s;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:relative;z-index:50;
+    background:rgba(247,245,239,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.25rem;}
+  .brand-logo{flex-shrink:0;}
+  .brand svg{display:block;}
+  .logo-footer{width:34px;height:34px;}
+  nav.links{display:flex;gap:28px;font-size:.92rem;font-weight:500;}
+  nav.links a:hover{color:var(--brass);}
+  .nav-cta{display:flex;gap:10px;align-items:center;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:999px;
+    font-weight:600;font-size:.92rem;
+    border:1px solid transparent;cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--ink);color:var(--paper);}
+  .btn-primary:hover{background:var(--ink-light);}
+  .btn-brass{background:var(--brass);color:#1a1200;}
+  .btn-brass:hover{background:var(--brass-light);}
+  .btn-ghost{border-color:var(--ink);color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);}
+  .menu-toggle{
+    display:none;background:var(--paper-dim);border:none;border-radius:10px;
+    font-size:1.5rem;line-height:1;cursor:pointer;color:var(--ink);
+    padding:8px 12px;flex-shrink:0;
+  }
+
+  /* ---------- MENU LATÉRAL (☰) ---------- */
+  #menu-overlay{
+    display:none;position:fixed;inset:0;background:rgba(17,17,17,.55);
+    z-index:300;
+  }
+  #menu-overlay.open{display:block;}
+  #side-menu{
+    position:fixed;top:0;right:0;bottom:0;width:340px;max-width:88vw;
+    background:var(--paper);z-index:310;
+    box-shadow:-6px 0 24px rgba(0,0,0,.18);
+    transform:translateX(100%);transition:transform .25s ease;
+    overflow-y:auto;
+  }
+  #side-menu.open{transform:translateX(0);}
+  .side-menu-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 20px;border-bottom:1px solid var(--line);
+  }
+  .side-menu-head strong{font-family:'Fraunces',serif;font-size:1.15rem;}
+  #side-menu-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--slate);}
+  .side-menu-body{padding:14px 20px 32px;display:flex;flex-direction:column;gap:6px;}
+  .side-link{
+    display:block;padding:13px 4px;font-weight:600;font-size:.98rem;
+    border-bottom:1px solid var(--line);
+  }
+  .side-accordion{border-bottom:1px solid var(--line);}
+  .side-accordion summary{
+    list-style:none;cursor:pointer;padding:13px 4px;
+    display:flex;align-items:center;justify-content:space-between;
+    font-weight:600;font-size:.98rem;
+  }
+  .side-accordion summary::-webkit-details-marker{display:none;}
+  .side-accordion summary::after{content:"+";font-size:1.2rem;color:var(--brass);transition:transform .15s;}
+  .side-accordion[open] summary::after{content:"–";}
+  .side-accordion .side-accordion-content{padding:0 4px 16px;color:var(--slate);font-size:.86rem;}
+  .side-accordion .side-accordion-content p{margin-bottom:10px;}
+  .side-accordion .side-accordion-content ul{margin-bottom:12px;}
+  .side-accordion .side-accordion-content li{position:relative;padding-left:14px;margin-bottom:5px;}
+  .side-accordion .side-accordion-content li::before{content:"—";position:absolute;left:0;opacity:.6;}
+  .side-accordion .side-accordion-content .btn{width:100%;justify-content:center;}
+  .side-menu-sub-head{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--brass);margin:18px 0 4px;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:0 0 64px;}
+  .hero-photo-zone{
+    position:relative;min-height:360px;display:flex;align-items:center;
+    overflow:hidden;
+    background:var(--ink);
+    color:#fff;padding:40px 28px;
+  }
+  .hero-slide{
+    position:absolute;inset:0;background-size:cover;background-position:center;
+    opacity:0;z-index:0;
+    transition:opacity 1.2s ease-in-out;
+  }
+  .hero-slide.active{opacity:1;z-index:1;}
+  .hero-photo-zone::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 12% 15%, rgba(179,20,27,.4), transparent 45%),
+      radial-gradient(circle at 88% 85%, rgba(30,107,60,.45), transparent 50%),
+      rgba(10,10,10,.35);
+    z-index:1;
+  }
+  .hero-photo-zone .hero-text{max-width:640px;position:relative;z-index:2;}
+  @media (prefers-reduced-motion: reduce){
+    .hero-slide{transition:none;}
+  }
+  .hero-phone-pill{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--brass-light);color:#fff;font-weight:700;
+    padding:12px 22px;border-radius:999px;text-decoration:none;
+    margin-bottom:22px;font-size:1rem;
+  }
+
+  /* ---------- BULLES FLOTTANTES (WhatsApp + Mail) ---------- */
+  #floating-stack{
+    position:fixed;right:18px;bottom:18px;z-index:400;
+    display:flex;flex-direction:column;gap:12px;align-items:flex-end;
+  }
+  .floating-btn{
+    display:flex;align-items:center;gap:10px;text-decoration:none;
+  }
+  .floating-bubble{
+    background:#fff;color:var(--ink);font-size:.85rem;font-weight:500;
+    padding:10px 14px;border-radius:12px;box-shadow:0 4px 18px rgba(0,0,0,.18);
+    white-space:nowrap;
+  }
+  .floating-icon{
+    width:56px;height:56px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    box-shadow:0 4px 18px rgba(0,0,0,.25);
+  }
+  .floating-icon.wa{background:#25D366;animation:wa-float-pulse 2s infinite;}
+  .floating-icon.mail{background:var(--brass);animation:mail-float-pulse 2s infinite;}
+  @keyframes wa-float-pulse{
+    0%,100%{box-shadow:0 4px 18px rgba(0,0,0,.25), 0 0 0 0 rgba(37,211,102,.5);}
+    50%{box-shadow:0 4px 18px rgba(0,0,0,.25), 0 0 0 10px rgba(37,211,102,0);}
+  }
+  @keyframes mail-float-pulse{
+    0%,100%{box-shadow:0 4px 18px rgba(0,0,0,.25), 0 0 0 0 rgba(179,20,27,.5);}
+    50%{box-shadow:0 4px 18px rgba(0,0,0,.25), 0 0 0 10px rgba(179,20,27,0);}
+  }
+  @media (max-width:560px){
+    .floating-bubble{display:none;}
+    .floating-icon{width:48px;height:48px;font-size:1.3rem;}
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--green-light);margin-bottom:18px;
+  }
+  .eyebrow .line{width:22px;height:1px;background:var(--green-light);}
+  .hero h1{font-size:2.9rem;letter-spacing:-.01em;margin-bottom:18px;color:#fff;}
+  .hero h1 em{font-style:normal;color:var(--brass-light);}
+  .hero p.lead{font-size:1.08rem;color:rgba(255,255,255,.85);max-width:46ch;margin-bottom:28px;}
+  .hero .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .trust-row{display:flex;gap:22px;flex-wrap:wrap;font-size:.88rem;color:rgba(255,255,255,.8);}
+  .trust-row strong{color:#fff;}
+  .stars{color:var(--green-light);letter-spacing:1px;}
+
+  .hero-card{
+    background:var(--ink);color:var(--paper);
+    border-radius:16px;padding:28px;
+    position:relative;overflow:hidden;
+  }
+  .hero-card::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 0%, rgba(30,107,60,.4), transparent 55%);
+  }
+  .hero-card h3{font-size:1.15rem;margin-bottom:4px;position:relative;}
+  .hero-card p{color:#C9CFDC;font-size:.88rem;margin-bottom:18px;position:relative;}
+  .quote-list{position:relative;display:flex;flex-direction:column;gap:10px;}
+  .quote-item{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;padding:12px 14px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:.9rem;cursor:pointer;transition:border-color .15s, background .15s;
+  }
+  .quote-item span:first-child{font-weight:600;}
+  .quote-item span:last-child{color:var(--green-light);font-weight:600;}
+  .quote-item:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.1);}
+
+  /* ---------- MODALE DEVIS ---------- */
+  #devis-overlay{
+    display:none;position:fixed;inset:0;background:rgba(17,17,17,.55);
+    z-index:200;align-items:center;justify-content:center;padding:20px;
+  }
+  #devis-overlay.open{display:flex;}
+  #devis-modal{
+    background:var(--paper);border-radius:16px;max-width:480px;width:100%;
+    padding:28px;position:relative;max-height:92vh;overflow-y:auto;
+  }
+  #devis-modal h3{font-size:1.3rem;margin-bottom:6px;}
+  #devis-modal p.sub{color:var(--slate);font-size:.88rem;margin-bottom:18px;}
+  #devis-close{
+    position:absolute;top:16px;right:16px;background:none;border:none;
+    font-size:1.3rem;cursor:pointer;color:var(--slate);line-height:1;
+  }
+  #devis-status{display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:.88rem;}
+  #devis-status.ok{display:block;background:rgba(30,107,60,.12);color:var(--green);}
+  #devis-status.err{display:block;background:rgba(179,20,27,.1);color:var(--brass);}
+  #booking-status{display:none;margin-top:12px;padding:12px 14px;border-radius:8px;font-size:.88rem;}
+  #booking-status.ok{display:block;background:rgba(30,107,60,.12);color:var(--green);}
+  #booking-status.err{display:block;background:rgba(179,20,27,.1);color:var(--brass);}
+
+  /* ---------- MODALE INFO (service / véhicule) ---------- */
+  #info-overlay{
+    display:none;position:fixed;inset:0;background:rgba(17,17,17,.55);
+    z-index:200;align-items:center;justify-content:center;padding:20px;
+  }
+  #info-overlay.open{display:flex;}
+  #info-modal{
+    background:#fff;border-radius:16px;max-width:460px;width:100%;
+    position:relative;max-height:92vh;overflow-y:auto;
+  }
+  #info-modal .info-photo{width:100%;aspect-ratio:16/10;background:var(--paper-dim) center/cover no-repeat;border-radius:16px 16px 0 0;}
+  #info-modal .info-icon{
+    width:100%;aspect-ratio:16/8;background:var(--paper-dim);border-radius:16px 16px 0 0;
+    display:flex;align-items:center;justify-content:center;font-size:3rem;
+  }
+  #info-modal .info-body{padding:26px;}
+  #info-modal h3{font-size:1.3rem;margin-bottom:10px;}
+  #info-modal p{color:var(--slate);font-size:.92rem;margin-bottom:20px;}
+  #info-close{
+    position:absolute;top:14px;right:14px;background:rgba(17,17,17,.55);color:#fff;
+    border:none;width:30px;height:30px;border-radius:50%;font-size:1.1rem;cursor:pointer;line-height:1;
+  }
+
+  /* ---------- ROUTE DIVIDER (signature element) ---------- */
+  .route{
+    display:flex;align-items:center;gap:10px;
+    padding:4px 0 22px;color:var(--slate);font-size:.8rem;font-weight:600;
+    letter-spacing:.04em;text-transform:uppercase;
+  }
+  .route .track{flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--brass) 0 6px, transparent 6px 12px);}
+
+  /* ---------- POINTS DE CONFIANCE ---------- */
+  .trust-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:10px;
+    margin-bottom:10px;
+  }
+  .trust-item{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:12px 10px;text-align:center;cursor:pointer;transition:border-color .15s, transform .15s;
+    position:relative;
+  }
+  .trust-item:hover{border-color:var(--green);transform:translateY(-2px);}
+  .trust-item:active{transform:translateY(0);}
+  .trust-item::after{
+    content:"+";position:absolute;top:6px;right:6px;
+    width:17px;height:17px;border-radius:50%;background:var(--brass);color:#fff;
+    font-size:.72rem;font-weight:700;line-height:17px;text-align:center;
+  }
+  .trust-icon{font-size:1.2rem;display:block;margin-bottom:5px;}
+  .trust-item strong{display:block;font-size:.78rem;margin-bottom:2px;}
+  .trust-item p{font-size:.72rem;color:var(--slate);margin:0;line-height:1.4;}
+  @media (max-width:900px){.trust-grid{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:560px){
+    .trust-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .trust-item{padding:10px 6px;}
+    .trust-item p{display:none;}
+  }
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:36px 0;}
+  .section-head{max-width:640px;margin-bottom:22px;}
+  .section-head .eyebrow{margin-bottom:8px;}
+  .section-head h2{font-size:1.7rem;}
+  .section-head p{color:var(--slate);margin-top:6px;}
+
+  /* ---------- SERVICES ---------- */
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .service-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 14px;transition:border-color .15s, transform .15s;
+    position:relative;
+  }
+  .service-card:hover{border-color:var(--green);transform:translateY(-3px);}
+  .service-card::after{
+    content:"+";position:absolute;top:8px;right:8px;
+    width:20px;height:20px;border-radius:50%;background:var(--brass);color:#fff;
+    font-size:.85rem;font-weight:700;line-height:20px;text-align:center;
+  }
+  .service-card .icon{
+    width:32px;height:32px;border-radius:8px;background:var(--paper-dim);
+    display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:1rem;
+  }
+  .service-card h3{font-size:.96rem;margin-bottom:4px;}
+  .service-card p{font-size:.8rem;color:var(--slate);line-height:1.4;}
+  @media (max-width:680px){
+    .service-card p{
+      display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;
+      overflow:hidden;font-size:.7rem;line-height:1.35;
+    }
+    .service-card{padding:12px 8px;text-align:center;}
+    .service-card h3{font-size:.78rem;margin-bottom:3px;}
+    .service-card .icon{margin-left:auto;margin-right:auto;}
+    .service-card::after{width:17px;height:17px;font-size:.72rem;line-height:17px;top:6px;right:6px;}
+  }
+
+  /* ---------- COLIS & VEHICULES ---------- */
+  .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .split-card{
+    border-radius:16px;padding:32px;color:var(--paper);
+    position:relative;overflow:hidden;
+  }
+  .split-card.colis{background:linear-gradient(155deg, #1a1a1a 0%, #111 60%);}
+  .split-card.vehicules{background:linear-gradient(155deg, #16241b 0%, #111 60%);}
+  .split-card .tag{
+    display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .split-card.colis .tag{background:rgba(179,20,27,.22);color:#FF7A7F;}
+  .split-card.vehicules .tag{background:rgba(30,107,60,.28);color:#6FDB94;}
+  .split-card h3{font-size:1.4rem;margin-bottom:10px;}
+  .split-card p{font-size:.92rem;color:#CFCFCF;margin-bottom:18px;max-width:42ch;}
+  .split-card ul{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+  .split-card ul li{font-size:.86rem;color:#E8E8E8;display:flex;gap:8px;align-items:flex-start;}
+  .split-card ul li::before{content:"—";color:inherit;opacity:.6;flex-shrink:0;}
+
+
+  /* ---------- FENÊTRE MA FLOTTE ---------- */
+  #fleet-overlay{
+    display:none;position:fixed;inset:0;background:rgba(17,17,17,.55);
+    z-index:200;align-items:center;justify-content:center;padding:20px;
+  }
+  #fleet-overlay.open{display:flex;}
+  #fleet-modal{
+    background:var(--paper);border-radius:16px;max-width:520px;width:100%;
+    padding:28px;position:relative;max-height:92vh;overflow-y:auto;
+  }
+  #fleet-modal h3{font-size:1.3rem;margin-bottom:6px;}
+  #fleet-modal p.sub{color:var(--slate);font-size:.88rem;margin-bottom:18px;}
+  #fleet-close{
+    position:absolute;top:16px;right:16px;background:none;border:none;
+    font-size:1.3rem;cursor:pointer;color:var(--slate);line-height:1;
+  }
+  .fleet-list{display:flex;flex-direction:column;gap:10px;}
+  .fleet-list-item{
+    display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    transition:border-color .15s, transform .15s;
+  }
+  .fleet-list-item:hover{border-color:var(--green);transform:translateX(2px);}
+  .fleet-list-item .icon{
+    width:38px;height:38px;border-radius:9px;background:var(--paper-dim);flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  }
+  .fleet-list-item .badge{
+    font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--green);display:block;margin-bottom:2px;
+  }
+  .fleet-list-item h3{font-size:.95rem;margin-bottom:2px;}
+  .fleet-list-item p{font-size:.8rem;color:var(--slate);}
+
+  /* ---------- COVERAGE ---------- */
+  .coverage-box{
+    background:var(--ink);color:var(--paper);border-radius:16px;
+    padding:22px 26px;display:grid;grid-template-columns:1fr 1fr;gap:16px;
+  }
+  .coverage-box details{border-bottom:none;}
+  .coverage-box summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    font-family:'Fraunces',serif;font-size:1.1rem;color:var(--brass-light);padding:6px 0;
+  }
+  .coverage-box summary::-webkit-details-marker{display:none;}
+  .coverage-box summary::after{
+    content:"+";width:20px;height:20px;border-radius:50%;background:var(--brass);color:#fff;
+    font-size:.85rem;font-weight:700;line-height:20px;text-align:center;flex-shrink:0;
+  }
+  .coverage-box details[open] summary::after{content:"–";}
+  .coverage-box summary .count{font-size:.75rem;color:#C9CFDC;font-family:'Inter',sans-serif;font-weight:400;margin-left:8px;}
+  .coverage-box .pill-list{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;}
+  .pill{
+    font-size:.82rem;padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  }
+  @media (max-width:680px){.coverage-box{grid-template-columns:1fr;padding:18px 18px;}}
+
+  /* ---------- REVIEWS ---------- */
+  .review-summary{
+    display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 28px;margin-bottom:24px;
+  }
+  .rating-num{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:700;color:var(--ink);}
+  .review-summary .stars{font-size:1.2rem;}
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .review-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;}
+  .review-card .stars{font-size:.9rem;margin-bottom:10px;display:block;}
+  .review-card p{font-size:.88rem;color:var(--slate);margin-bottom:12px;}
+  .review-card .who{font-size:.82rem;font-weight:600;color:var(--ink);}
+
+  /* ---------- REVIEW CARDS (carrousel) ---------- */
+  .review-grid-static{
+    display:flex;gap:16px;margin-bottom:20px;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    padding-bottom:6px;scrollbar-width:none;
+  }
+  .review-grid-static::-webkit-scrollbar{display:none;}
+  .review-static-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+    flex:0 0 260px;scroll-snap-align:start;
+  }
+  .review-static-card .stars{font-size:.9rem;margin-bottom:10px;display:block;color:var(--green);}
+  .review-static-card p{font-size:.88rem;color:var(--slate);margin-bottom:12px;}
+  .review-static-card .who{font-size:.82rem;font-weight:600;color:var(--ink);}
+
+  .estimate-box{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;margin-bottom:24px;
+  }
+  .estimate-box h3{font-size:1.1rem;margin-bottom:6px;}
+  .estimate-disclaimer{
+    background:var(--paper-dim);border-left:3px solid var(--brass);
+    border-radius:6px;padding:12px 14px;font-size:.82rem;color:var(--slate);margin-top:14px;
+  }
+  #estimate-result{
+    margin-top:14px;padding:16px;border-radius:8px;background:#111;color:#fff;display:none;
+  }
+  #estimate-result .price{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--green-light);}
+
+
+  .booking{
+    background:var(--paper-dim);border-radius:16px;padding:26px;
+    display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;
+  }
+  .booking-info h2{font-size:1.5rem;margin-bottom:8px;}
+  .booking-info p{color:var(--slate);margin-bottom:14px;}
+  .contact-line{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:.9rem;}
+  .contact-line .ico{width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+  form{display:grid;gap:9px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  label{font-size:.76rem;font-weight:600;color:var(--slate);margin-bottom:3px;display:block;}
+  input,select,textarea{
+    width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;
+    font-family:'Inter',sans-serif;font-size:.9rem;background:#fff;color:var(--ink);
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--brass);outline-offset:1px;border-color:var(--brass);}
+  textarea{resize:vertical;min-height:60px;}
+  .form-actions{display:flex;gap:12px;margin-top:4px;flex-wrap:wrap;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:36px 0;margin-top:20px;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.85rem;color:var(--slate);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:960px){
+    .hero{grid-template-columns:1fr;}
+    .service-grid{grid-template-columns:repeat(2,1fr);}
+    .fleet-grid{grid-template-columns:repeat(2,1fr);}
+    .coverage-box{grid-template-columns:1fr;}
+    .review-grid{grid-template-columns:1fr;}
+    .booking{grid-template-columns:1fr;padding:26px;}
+  }
+  @media (max-width:680px){
+    .wrap{padding:0 14px;}
+    .wrap.nav{padding:0 12px;}
+    .nav{padding:10px 0;}
+    nav.links{display:none;}
+    .menu-toggle{display:block;}
+    .hero{padding:0 0 32px;}
+    .hero-photo-zone{padding:24px 18px;min-height:auto;}
+    .hero h1{font-size:1.9rem;margin-bottom:12px;}
+    .hero p.lead{font-size:.94rem;margin-bottom:18px;}
+    .hero .cta-row{margin-bottom:16px;}
+    .hero-phone-pill{padding:9px 16px;font-size:.88rem;margin-bottom:14px;}
+    .eyebrow{margin-bottom:10px;}
+    .trust-row{gap:8px 16px;font-size:.8rem;}
+    .service-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .fleet-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .nav-cta{gap:6px;}
+    .nav-cta .btn-ghost{padding:8px 9px;}
+    .review-summary{padding:16px 18px;gap:6px 14px;}
+    .rating-num{font-size:1.7rem;}
+    .review-summary .stars{font-size:.95rem;}
+    .review-summary > div:nth-child(2){display:flex;flex-direction:column;gap:2px;}
+    .review-summary a.btn{margin-left:0 !important;width:100%;justify-content:center;margin-top:4px;}
+    .section-head{margin-bottom:14px;}
+    .section-head .eyebrow{margin-bottom:4px;}
+    section{padding:20px 0;}
+    .review-grid-static{margin-bottom:8px;}
+    .review-summary{margin-bottom:10px;}
+    .estimate-box{padding:16px;margin-bottom:14px;}
+    .booking{padding:16px;gap:14px;}
+    .booking-info h2{font-size:1.3rem;margin-bottom:4px;}
+    .booking-info p{margin-bottom:10px;font-size:.88rem;}
+    .contact-line{margin-bottom:6px;}
+    form{gap:6px;}
+    .form-row{gap:6px;}
+    label{margin-bottom:1px;}
+    input,select,textarea{padding:7px 10px;}
+    textarea{min-height:44px;}
+    .form-actions{margin-top:0;}
+    .nav-cta .btn-ghost .label{display:none;}
+    .nav-cta .btn-brass{display:none;}
+    #lang-switch{padding:6px 6px !important;font-size:.8rem !important;}
+    .btn-whatsapp{padding:8px 10px;}
+    .btn-whatsapp .label{display:none;}
+    .brand{font-size:1.05rem;gap:6px;}
+    .navette-badge{padding:7px 10px;font-size:.72rem;}
+  }
+  @media (max-width:420px){
+    .navette-badge .label{display:none;}
+    .navette-badge{padding:8px;border-radius:50%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn,.service-card{transition:none;}
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+<!--
+  ============================================================
+  ZONE DE CONFIGURATION — modifie uniquement ici pour tout mettre à jour
+  (téléphone, WhatsApp, avis Google, services, véhicules, zones...)
+  Le reste du fichier lit ces informations automatiquement.
+  ============================================================
+-->
+<script>
+const CONFIG = {
+  telephone_affiche: "0032 495 35 35 94",
+  telephone_lien: "+32495353594",
+  whatsapp_numero: "32495353594",
+  email: "infotaxiwal@gmail.com",
+  formspree_endpoint: "https://formspree.io/f/xwleqqgl",
+  emailjs_service_id: "service_i9j07f9",
+  emailjs_template_id: "template_rwz9fh7",
+  emailjs_public_key: "4M5btJLpy3Lo8I1t5",
+  fiche_google_url: "https://maps.app.goo.gl/pMnduRUgnQnUZ6KN8",
+  lien_laisser_avis: "https://maps.app.goo.gl/pMnduRUgnQnUZ6KN8",
+  note_google: "4.8",
+  votes_google: "avis vérifiés",
+  // Tarifs officiels région wallonne / commune (grille affichée dans le véhicule)
+  estimation: {
+    prise_en_charge_jour: 3.10,
+    prise_en_charge_nuit: 6.20,
+    prix_km_aller_retour: 1.70,
+    prix_km_aller_simple: 2.50,
+    course_minimum: 8.20,
+    tarif_heure_attente: 24
+  }
+};
+const I18N = {
+  fr: {
+    nav_services:"Services", nav_extra:"Colis & Véhicules", nav_flotte:"Flotte",
+    nav_zone:"Zone couverte", nav_avis:"Avis", nav_reservation:"Réservation", nav_reserver:"Réserver",
+    hero_title:'Taxi La Louvière — Navette Aéroport & Chauffeur privé,<br><em>quand vous en avez besoin</em>.',
+    hero_lead:"Navette aéroport, trajets sur mesure, entreprises et événements. Véhicules haut de gamme, chauffeurs professionnels, disponible 24h/24 — 7j/7.",
+    hero_cta1:"Réserver une course", hero_cta2:"WhatsApp direct",
+    services_title:"Un service pour chaque situation",
+    flotte_title:"Des véhicules récents et confortables",
+    avis_title:"Avis clients vérifiés sur Google",
+    booking_title:"Réservez votre trajet",
+    booking_lead:"Remplissez le formulaire ou contactez-nous directement — réponse rapide garantie."
+  },
+  nl: {
+    nav_services:"Diensten", nav_extra:"Pakketten & Voertuigen", nav_flotte:"Wagenpark",
+    nav_zone:"Werkgebied", nav_avis:"Beoordelingen", nav_reservation:"Reservering", nav_reserver:"Reserveren",
+    hero_title:'Privéchauffeur & Luchthavenshuttle,<br><em>wanneer u het nodig heeft</em>.',
+    hero_lead:"Luchthavenvervoer, ritten op maat, bedrijven en evenementen. Voertuigen van hoge kwaliteit, professionele chauffeurs, 24u/24 — 7d/7 beschikbaar.",
+    hero_cta1:"Rit reserveren", hero_cta2:"Direct WhatsApp",
+    services_title:"Een dienst voor elke situatie",
+    flotte_title:"Recente en comfortabele voertuigen",
+    avis_title:"Geverifieerde klantbeoordelingen op Google",
+    booking_title:"Reserveer uw rit",
+    booking_lead:"Vul het formulier in of neem rechtstreeks contact op — snel antwoord gegarandeerd."
+  },
+  en: {
+    nav_services:"Services", nav_extra:"Parcels & Vehicles", nav_flotte:"Fleet",
+    nav_zone:"Coverage area", nav_avis:"Reviews", nav_reservation:"Booking", nav_reserver:"Book now",
+    hero_title:'Private Chauffeur & Airport Shuttle,<br><em>whenever you need it</em>.',
+    hero_lead:"Airport shuttle, custom trips, business and events. Premium vehicles, professional drivers, available 24/7.",
+    hero_cta1:"Book a ride", hero_cta2:"WhatsApp direct",
+    services_title:"A service for every situation",
+    flotte_title:"Recent, comfortable vehicles",
+    avis_title:"Verified customer reviews on Google",
+    booking_title:"Book your ride",
+    booking_lead:"Fill in the form or contact us directly — fast response guaranteed."
+  }
+};
+function applyLang(lang){
+  const dict = I18N[lang] || I18N.fr;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if(dict[key]) el.innerHTML = dict[key];
+  });
+  document.documentElement.lang = lang;
+  localStorage.setItem("taxiwal_lang", lang);
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("taxiwal_lang") || "fr";
+  document.getElementById("lang-switch").value = saved;
+  applyLang(saved);
+  document.getElementById("lang-switch").addEventListener("change", (e) => applyLang(e.target.value));
+  document.querySelectorAll("[data-tel]").forEach(el => el.href = "tel:" + CONFIG.telephone_lien);
+  document.querySelectorAll("[data-tel-text]").forEach(el => el.textContent = CONFIG.telephone_affiche);
+  document.querySelectorAll("[data-mail]").forEach(el => el.href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent("Demande de course - Taxi Wal"));
+  document.querySelectorAll("[data-mail-text]").forEach(el => el.textContent = CONFIG.email);
+  document.querySelectorAll("[data-whatsapp]").forEach(el => el.href = "https://wa.me/" + CONFIG.whatsapp_numero);
+  document.querySelectorAll("[data-google]").forEach(el => el.href = CONFIG.fiche_google_url);
+  document.querySelectorAll("[data-leave-review]").forEach(el => el.href = CONFIG.lien_laisser_avis);
+  document.querySelectorAll("[data-note]").forEach(el => el.textContent = CONFIG.note_google);
+
+  // ---------- CARROUSEL AVIS ----------
+  const reviewTrack = document.getElementById("real-reviews");
+  if(reviewTrack){
+    let reviewAutoTimer = null;
+    function startReviewAuto(){
+      reviewAutoTimer = setInterval(() => {
+        const card = reviewTrack.querySelector(".review-static-card");
+        if(!card) return;
+        const step = card.offsetWidth + 16;
+        const atEnd = reviewTrack.scrollLeft + reviewTrack.clientWidth >= reviewTrack.scrollWidth - 4;
+        reviewTrack.scrollTo({ left: atEnd ? 0 : reviewTrack.scrollLeft + step, behavior: "smooth" });
+      }, 3200);
+    }
+    function stopReviewAuto(){ clearInterval(reviewAutoTimer); }
+    startReviewAuto();
+    reviewTrack.addEventListener("mouseenter", stopReviewAuto);
+    reviewTrack.addEventListener("touchstart", stopReviewAuto, { passive:true });
+    reviewTrack.addEventListener("mouseleave", startReviewAuto);
+  }
+
+  // ---------- MENU LATÉRAL ----------
+  const menuToggle = document.querySelector(".menu-toggle");
+  const sideMenu = document.getElementById("side-menu");
+  const menuOverlay = document.getElementById("menu-overlay");
+  function openSideMenu(){
+    sideMenu.classList.add("open");
+    menuOverlay.classList.add("open");
+  }
+  function closeSideMenu(){
+    sideMenu.classList.remove("open");
+    menuOverlay.classList.remove("open");
+  }
+  if(menuToggle){ menuToggle.addEventListener("click", openSideMenu); }
+  const floatingMenuBtn = document.getElementById("floating-menu-btn");
+  if(floatingMenuBtn){ floatingMenuBtn.addEventListener("click", openSideMenu); }
+  window.addEventListener("scroll", () => {
+    if(!floatingMenuBtn) return;
+    if(window.scrollY > 260){ floatingMenuBtn.classList.add("show"); }
+    else{ floatingMenuBtn.classList.remove("show"); }
+  }, { passive:true });
+  document.getElementById("side-menu-close").addEventListener("click", closeSideMenu);
+  menuOverlay.addEventListener("click", closeSideMenu);
+  document.querySelectorAll("[data-close-menu]").forEach(el => el.addEventListener("click", closeSideMenu));
+  document.querySelectorAll("#side-menu [data-devis-trigger]").forEach(el => el.addEventListener("click", closeSideMenu));
+});
+</script>
+
+<div id="site-top">
+  <div id="wa-topbar">
+    <a href="https://wa.me/32495353594" data-whatsapp target="_blank" rel="noopener">
+      <span class="wa-pulse-ring">
+        <svg class="wa-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="16" fill="#25D366"/>
+          <path d="M23.47 8.52A9.86 9.86 0 0 0 16.06 5.5c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L6 26.5l6.3-1.65a9.9 9.9 0 0 0 9.76-17.33z" fill="#25D366"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.06 25.4a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.74.98 1-3.65-.24-.38a9.9 9.9 0 1 1 8.39 4.64zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#fff"/>
+        </svg>
+      </span>
+      Réservez en 1 message sur WhatsApp — réponse rapide garantie !
+    </a>
+  </div>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <svg class="brand-logo" width="34" height="42" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pinGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--brass-light)"/>
+              <stop offset="100%" stop-color="var(--brass)"/>
+            </linearGradient>
+            <filter id="pinShadow" x="-40%" y="-20%" width="180%" height="160%">
+              <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000" flood-opacity="0.28"/>
+            </filter>
+            <clipPath id="pinPhotoClip">
+              <circle cx="50" cy="47" r="32"/>
+            </clipPath>
+          </defs>
+          <g filter="url(#pinShadow)">
+            <path d="M50 2 C24 2 4 22 4 47 C4 68 30 92 50 122 C70 92 96 68 96 47 C96 22 76 2 50 2 Z" fill="url(#pinGrad)"/>
+          </g>
+          <image href="bmw-serie5.jpg" x="4" y="19" width="92" height="56" preserveAspectRatio="xMidYMid slice" clip-path="url(#pinPhotoClip)"/>
+          <circle cx="50" cy="47" r="34" fill="none" stroke="var(--green)" stroke-width="4"/>
+        </svg>
+        <span>Taxi La Louvière</span>
+        <button class="navette-badge" data-devis-trigger data-route="Navette aéroport" type="button">
+          <span class="plane">✈️</span> <span class="label">Navette Aéroport</span>
+        </button>
+      </div>
+      <nav class="links">
+        <a href="#services" data-i18n="nav_services">Services</a>
+        <a href="#services" data-i18n="nav_extra">Colis & Véhicules</a>
+        <a href="#" class="open-fleet-link" data-i18n="nav_flotte">Flotte</a>
+        <a href="#zone" data-i18n="nav_zone">Zone couverte</a>
+        <a href="#avis" data-i18n="nav_avis">Avis</a>
+        <a href="#reservation" data-i18n="nav_reservation">Réservation</a>
+      </nav>
+      <div class="nav-cta">
+        <select id="lang-switch" style="border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:.95rem;background:#fff;font-family:'Inter',sans-serif;">
+          <option value="fr">🇫🇷 FR</option>
+          <option value="nl">🇳🇱 NL</option>
+          <option value="en">🇬🇧 EN</option>
+        </select>
+        <a href="https://wa.me/32495353594" data-whatsapp target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <svg class="wa-icon wa-icon-lg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#fff"/>
+            <path d="M23.47 8.52A9.86 9.86 0 0 0 16.06 5.5c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L6 26.5l6.3-1.65a9.9 9.9 0 0 0 9.76-17.33z" fill="#25D366"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.06 25.4a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.74.98 1-3.65-.24-.38a9.9 9.9 0 1 1 8.39 4.64zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#fff"/>
+          </svg>
+          <span class="label">WhatsApp</span>
+        </a>
+        <a href="#reservation" class="btn btn-brass" data-i18n="nav_reserver">Réserver</a>
+      </div>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+</div>
+
+<button id="floating-menu-btn" aria-label="Menu">☰</button>
+
+<div id="menu-overlay"></div>
+<div id="side-menu">
+  <div class="side-menu-head">
+    <strong>Menu</strong>
+    <button id="side-menu-close" aria-label="Fermer le menu">✕</button>
+  </div>
+  <div class="side-menu-body">
+    <a href="#" class="side-link" data-close-menu>🏠 Taxi Wal — Accueil</a>
+
+    <details class="side-accordion">
+      <summary>✈️ Navette Aéroport</summary>
+      <div class="side-accordion-content">
+        <p>Bruxelles-Zaventem, Charleroi, Liège, Lille, Paris et toute l'Europe. Prise en charge à domicile, hôtel, gare ou entreprise, suivi de votre vol.</p>
+        <button type="button" class="btn btn-brass" data-devis-trigger data-route="Navette aéroport">Demander un devis</button>
+      </div>
+    </details>
+
+    <a href="#avis" class="side-link" data-close-menu>⭐ Témoignages clients</a>
+
+    <details class="side-accordion">
+      <summary>🚗 Plaque Z & véhicules d'occasion</summary>
+      <div class="side-accordion-content">
+        <p>Tout ce qu'il faut pour déplacer, sortir ou vendre un véhicule.</p>
+        <ul>
+          <li>Service plaque Z</li>
+          <li>Location de plaque Z</li>
+          <li>Sortie de fourrière</li>
+          <li>Vente de véhicules d'occasion</li>
+        </ul>
+        <button type="button" class="btn btn-brass" data-devis-trigger data-route="Plaque Z / véhicule d'occasion">Demander un devis</button>
+      </div>
+    </details>
+
+    <details class="side-accordion">
+      <summary>🚚 Déplacement de véhicules express</summary>
+      <div class="side-accordion-content">
+        <p>Convoyage rapide de votre véhicule d'un point A à un point B, en Belgique et à l'international, sur simple demande.</p>
+        <button type="button" class="btn btn-brass" data-devis-trigger data-route="Déplacement de véhicule express">Demander un devis</button>
+      </div>
+    </details>
+
+    <details class="side-accordion">
+      <summary>📦 Colis express en urgence</summary>
+      <div class="side-accordion-content">
+        <p>Livraison rapide de colis importants ou urgents, partout en Belgique et vers la France, l'Allemagne et les Pays-Bas. Prise en charge immédiate, remise en main propre, suivi par téléphone ou WhatsApp.</p>
+        <button type="button" class="btn btn-brass" data-devis-trigger data-route="Colis express">Demander un devis</button>
+      </div>
+    </details>
+
+    <div class="side-menu-sub-head">Navigation rapide</div>
+    <a href="#services" class="side-link" data-close-menu>Nos services</a>
+    <a href="#" class="side-link open-fleet-link" data-close-menu>Flotte</a>
+    <a href="#zone" class="side-link" data-close-menu>Zone couverte</a>
+    <a href="#reservation" class="side-link" data-close-menu>Réservation</a>
+
+    <div class="side-menu-sub-head">Nos zones</div>
+    <a href="#zone" class="side-link" data-close-menu>Taxi La Louvière</a>
+    <a href="#zone" class="side-link" data-close-menu>Taxi Manage</a>
+    <a href="#zone" class="side-link" data-close-menu>Navette tout aéroport belge & européen</a>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin-top:4px;">
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Le Rœulx</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Binche</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Morlanwelz</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Chapelle-lez-Herlaimont</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Seneffe</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Houdeng</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Strépy-Bracquegnies</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Trivières</a>
+      <a href="#zone" class="side-link" data-close-menu style="font-size:.85rem;padding:8px 4px;">Mons</a>
+    </div>
+
+    <a href="https://wa.me/32495353594" data-whatsapp target="_blank" rel="noopener" class="btn btn-whatsapp" style="margin-top:16px;justify-content:center;">💬 WhatsApp direct</a>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-photo-zone" style="border-radius:14px;">
+        <div id="hero-slides"></div>
+        <div class="hero-text">
+          <a href="tel:+32495353594" class="hero-phone-pill">📞 0032 495 35 35 94</a>
+          <div class="eyebrow"><span class="line"></span>La Louvière · Manage · Le Rœulx · Binche · Morlanwelz</div>
+          <h1 data-i18n="hero_title">Taxi Wal — Navette Aéroport & Chauffeur privé,<br><em>quand vous en avez besoin</em>.</h1>
+          <p class="lead" data-i18n="hero_lead">Navette aéroport, trajets sur mesure, entreprises et événements. Véhicules haut de gamme, chauffeurs professionnels, disponible 24h/24 — 7j/7.</p>
+          <div class="cta-row">
+            <a href="#reservation" class="btn btn-brass" data-i18n="hero_cta1">Réserver une course</a>
+            <a href="https://wa.me/32495353594" data-whatsapp class="btn btn-primary" target="_blank" rel="noopener" data-i18n="hero_cta2">WhatsApp direct</a>
+          </div>
+          <div class="trust-row">
+            <span class="stars">★★★★★</span>
+            <span><strong data-note></strong>/5 sur Google — <a href="https://maps.app.goo.gl/pMnduRUgnQnUZ6KN8" data-google target="_blank" rel="noopener" style="text-decoration:underline;">voir les avis</a></span>
+            <span>Réponse rapide, réservation en ligne ou par téléphone</span>
+          </div>
+        </div>
+    </div>
+    <div class="hero-card" style="margin-top:24px;">
+      <h3>Estimez votre trajet</h3>
+      <p>Quelques exemples de destinations fréquentes au départ de La Louvière / Centre.</p>
+      <div class="quote-list">
+        <div class="quote-item" data-devis-trigger data-route="Aéroport de Charleroi"><span>Aéroport de Charleroi</span><span>Sur devis</span></div>
+        <div class="quote-item" data-devis-trigger data-route="Aéroport de Bruxelles (Zaventem)"><span>Aéroport de Bruxelles (Zaventem)</span><span>Sur devis</span></div>
+        <div class="quote-item" data-devis-trigger data-route="Gare de La Louvière-Sud"><span>Gare de La Louvière-Sud</span><span>Sur devis</span></div>
+        <div class="quote-item" data-devis-trigger data-route="Événement / mariage"><span>Événement / mariage</span><span>Sur devis</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="route"><span class="track"></span> Domicile → Gare → Aéroport → Destination <span class="track"></span></div>
+
+  <!-- POINTS DE CONFIANCE -->
+  <div class="trust-grid">
+    <div class="trust-item" data-info-trigger data-title="24h/24 — 7j/7" data-icon="🕐" data-desc="Taxi Wal est disponible à tout moment, de jour comme de nuit, 7 jours sur 7. Un vol tôt le matin, un imprévu tard le soir : on s'adapte à votre planning, pas l'inverse."><span class="trust-icon">🕐</span><strong>24h/24 — 7j/7</strong><p>Disponible à tout moment, jour et nuit.</p></div>
+    <div class="trust-item" data-info-trigger data-title="Chauffeurs professionnels" data-icon="🤵" data-desc="Nos chauffeurs sont courtois, ponctuels et compétents. Ils connaissent parfaitement la région et vous accompagnent avec sérieux, que ce soit pour un trajet du quotidien ou un événement particulier."><span class="trust-icon">🤵</span><strong>Chauffeurs professionnels</strong><p>Courtois, ponctuels et compétents.</p></div>
+    <div class="trust-item" data-info-trigger data-title="Réservation pratique" data-icon="📱" data-desc="Réservez comme vous le souhaitez : en ligne via le site, par téléphone, ou directement par WhatsApp. Une confirmation rapide, sans complication."><span class="trust-icon">📱</span><strong>Réservation pratique</strong><p>En ligne, par téléphone ou WhatsApp.</p></div>
+    <div class="trust-item" data-info-trigger data-title="Ponctualité" data-icon="⏱️" data-desc="À l'heure, à chaque trajet. Nos chauffeurs anticipent la circulation et les imprévus pour que vous arriviez toujours à destination dans les temps."><span class="trust-icon">⏱️</span><strong>Ponctualité</strong><p>À l'heure, à chaque trajet.</p></div>
+    <div class="trust-item" data-info-trigger data-title="Tarifs officiels" data-icon="💶" data-desc="Nos tarifs suivent la grille officielle de la région wallonne et de la commune : prise en charge, prix au km, course minimum. Aucune surprise à l'arrivée."><span class="trust-icon">💶</span><strong>Tarifs officiels</strong><p>Grille région wallonne, sans surprise.</p></div>
+    <div class="trust-item" data-info-trigger data-title="Trajets confortables" data-icon="🚘" data-desc="Véhicules récents et bien entretenus (Renault Trafic, BMW, Mercedes, Toyota Corolla) pour un trajet agréable, que vous soyez seul, en famille ou en groupe."><span class="trust-icon">🚘</span><strong>Trajets confortables</strong><p>Véhicules récents et bien entretenus.</p></div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-head">
+      <div class="eyebrow"><span class="line"></span>Ce que nous proposons</div>
+      <h2 data-i18n="services_title">Un service pour chaque situation</h2>
+      <p>Particuliers, professionnels, événements ou mobilité réduite : chaque trajet est organisé sur mesure.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card" data-info-trigger
+           data-title="Navette aéroport"
+           data-desc="Nous vous emmenons vers tous les grands aéroports : Bruxelles-Zaventem, Charleroi, Liège, Lille, Paris et au-delà. Prise en charge à domicile, à l'hôtel, à la gare ou au bureau, suivi de votre vol et marge de sécurité incluse. Bagages, valises et sièges enfants sur demande."
+           data-icon="✈️">
+        <div class="icon">✈️</div>
+        <h3>Navette aéroport</h3>
+        <p>Bruxelles, Charleroi, Liège, Lille, Paris et toute l'Europe. Départ domicile, hôtel, gare ou entreprise.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Chauffeur privé"
+           data-desc="Un chauffeur professionnel à votre disposition pour tous vos déplacements en Belgique, France, Allemagne et Pays-Bas. Trajets ponctuels ou réguliers, mise à disposition à l'heure ou à la journée, discrétion et ponctualité garanties."
+           data-icon="🤵">
+        <div class="icon">🤵</div>
+        <h3>Chauffeur privé</h3>
+        <p>Trajets sur mesure en Belgique, France, Allemagne et Pays-Bas, avec chauffeur professionnel.</p>
+      </div>
+      <div class="service-card" id="fleet-open-trigger">
+        <div class="icon">🚗</div>
+        <h3>Ma Flotte</h3>
+        <p>Découvrez nos véhicules : Renault Trafic, BMW, Mercedes, Corolla Break — cliquez pour voir photos et détails.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Transport PMR"
+           data-desc="Trajets adaptés aux personnes à mobilité réduite : aide à l'embarquement, patience et attention, prise en charge du fauteuil roulant ou du déambulateur. Un service pensé pour le confort et la sécurité de nos passagers les plus fragiles."
+           data-icon="♿">
+        <div class="icon">♿</div>
+        <h3>Transport PMR</h3>
+        <p>Trajets adaptés aux personnes à mobilité réduite, avec assistance et prise en charge attentive.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Entreprises & sociétés"
+           data-desc="Comptes professionnels, facturation mensuelle, déplacements de personnel et navettes régulières. Nous accompagnons les entreprises de la région dans tous leurs besoins de mobilité, avec un interlocuteur dédié."
+           data-icon="🏢">
+        <div class="icon">🏢</div>
+        <h3>Entreprises & sociétés</h3>
+        <p>Déplacements de personnel, comptes professionnels et navettes régulières pour grandes entreprises.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Événements privés"
+           data-desc="Mariages, fêtes, anniversaires, séminaires : nos véhicules haut de gamme (BMW, Mercedes) et nos chauffeurs habillés pour l'occasion subliment vos déplacements le jour J."
+           data-icon="🥂">
+        <div class="icon">🥂</div>
+        <h3>Événements privés</h3>
+        <p>Mariages, fêtes, séminaires : véhicules haut de gamme pour vos occasions particulières.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Transferts gares"
+           data-desc="Connexions ferroviaires vers La Louvière-Sud, Mons, Bruxelles, Lille, Paris, Luxembourg. Idéal pour rejoindre le TGV ou le Thalys sans stress, avec une marge confortable avant le départ du train."
+           data-icon="🚉">
+        <div class="icon">🚉</div>
+        <h3>Transferts gares</h3>
+        <p>La Louvière-Sud, Mons, Bruxelles, Lille, Paris — connexions ferroviaires assurées.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Colis express en urgence"
+           data-desc="Livraison rapide de colis importants ou urgents, partout en Belgique et vers la France, l'Allemagne et les Pays-Bas. Prise en charge immédiate, remise en main propre, suivi par téléphone ou WhatsApp."
+           data-icon="📦">
+        <div class="icon">📦</div>
+        <h3>Colis express</h3>
+        <p>Livraison rapide de colis en Belgique, France, Allemagne et Pays-Bas. Prise en charge immédiate.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Plaque Z & véhicules d'occasion"
+           data-desc="Service et location de plaque Z, sortie de fourrière, vente de véhicules d'occasion. Tout ce qu'il faut pour déplacer, sortir ou vendre un véhicule, en toute simplicité."
+           data-icon="🚗">
+        <div class="icon">🚗</div>
+        <h3>Plaque Z & occasion</h3>
+        <p>Service plaque Z, sortie de fourrière, vente de véhicules d'occasion.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Déplacement de véhicules express"
+           data-desc="Convoyage rapide de votre véhicule d'un point A à un point B, en Belgique et à l'international, sur simple demande."
+           data-icon="🚚">
+        <div class="icon">🚚</div>
+        <h3>Déplacement de véhicules</h3>
+        <p>Convoyage rapide de votre véhicule, en Belgique et à l'international.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Disponible 24h/24"
+           data-desc="Un vol tôt le matin ou tard le soir ? Un imprévu de dernière minute ? Taxi Wal est disponible 7 jours sur 7, 24h/24, pour s'adapter à votre planning, pas l'inverse."
+           data-icon="🕐">
+        <div class="icon">🕐</div>
+        <h3>Disponible 24h/24</h3>
+        <p>Service flexible sur réservation, 7 jours sur 7, y compris tôt le matin ou tard le soir.</p>
+      </div>
+      <div class="service-card" data-info-trigger
+           data-title="Groupes & familles"
+           data-desc="Jusqu'à 7 places avec notre Renault Trafic : parfait pour les familles nombreuses, les groupes d'amis ou les déplacements avec beaucoup de bagages, sans devoir prendre deux véhicules."
+           data-icon="👨‍👩‍👧">
+        <div class="icon">👨‍👩‍👧</div>
+        <h3>Groupes & familles</h3>
+        <p>Véhicules spacieux jusqu'à 7 places pour les groupes, familles et bagages nombreux.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOTTE -->
+  <!-- ZONE -->
+  <section id="zone">
+    <div class="coverage-box">
+      <details>
+        <summary>Zone couverte <span class="count">(11 communes)</span></summary>
+        <p style="color:#C9CFDC;font-size:.85rem;margin-bottom:10px;">Basés à La Louvière, nous desservons toute la région du Centre et au-delà.</p>
+        <div class="pill-list">
+          <span class="pill">La Louvière</span><span class="pill">Manage</span><span class="pill">Le Rœulx</span>
+          <span class="pill">Binche</span><span class="pill">Morlanwelz</span><span class="pill">Chapelle-lez-Herlaimont</span>
+          <span class="pill">Seneffe</span><span class="pill">Houdeng</span><span class="pill">Strépy-Bracquegnies</span>
+          <span class="pill">Trivières</span><span class="pill">Mons</span>
+        </div>
+      </details>
+      <details>
+        <summary>Aéroports & grandes villes <span class="count">(12 destinations)</span></summary>
+        <p style="color:#C9CFDC;font-size:.85rem;margin-bottom:10px;">Navettes longue distance vers toute l'Europe.</p>
+        <div class="pill-list">
+          <span class="pill">Bruxelles</span><span class="pill">Charleroi</span><span class="pill">Liège</span>
+          <span class="pill">Ostende</span><span class="pill">Lille</span><span class="pill">Paris</span>
+          <span class="pill">Luxembourg</span><span class="pill">Amsterdam</span><span class="pill">Cologne</span>
+          <span class="pill">Düsseldorf</span><span class="pill">Francfort</span><span class="pill">Londres</span>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis">
+    <div class="section-head">
+      <div class="eyebrow"><span class="line"></span>Ils nous font confiance</div>
+      <h2 data-i18n="avis_title">Avis clients vérifiés sur Google</h2>
+    </div>
+    <div class="review-summary">
+      <div class="rating-num" data-note></div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <div style="font-size:.85rem;color:var(--slate);">Note moyenne sur Google — <a href="https://maps.app.goo.gl/pMnduRUgnQnUZ6KN8" data-google target="_blank" rel="noopener" style="text-decoration:underline;">voir tous les avis</a></div>
+      </div>
+      <a href="https://maps.app.goo.gl/pMnduRUgnQnUZ6KN8" data-leave-review target="_blank" rel="noopener" class="btn btn-brass" style="margin-left:auto;">✍️ Laisser un avis</a>
+    </div>
+
+    <div class="review-grid-static" id="real-reviews">
+      <div class="review-static-card">
+        <span class="stars">★★★★★</span>
+        <p>"Je recommande ++, chauffeur très accueillant et sympathique. Si je repasse dans le coin, je n'hésiterai pas."</p>
+        <div class="who">Marie Blanchart</div>
+      </div>
+      <div class="review-static-card">
+        <span class="stars">★★★★★</span>
+        <p>"Trajet de plus de 100km booké en urgence, le chauffeur a su se rendre disponible dans la demi-heure. Prix très correct et personne très professionnelle !"</p>
+        <div class="who">Axl</div>
+      </div>
+      <div class="review-static-card">
+        <span class="stars">★★★★★</span>
+        <p>"Très contente du service, véhicules confortables, polis, sérieux, on peut compter sur eux."</p>
+        <div class="who">Isabelle Resplendino</div>
+      </div>
+      <div class="review-static-card">
+        <span class="stars">★★★★★</span>
+        <p>"Un service au top ! Un grand professionnalisme et honnêteté ! 100% à recommander !"</p>
+        <div class="who">Pascale Palante — Local Guide</div>
+      </div>
+      <div class="review-static-card">
+        <span class="stars">★★★★★</span>
+        <p>"Les taxis sont tous occupés mais un taximan a pris ma demande en compte sur son jour de congé. 5 minutes après mon appel, il était devant chez moi avec le sourire. Merci !"</p>
+        <div class="who">Ophélie Mouton</div>
+      </div>
+      <div class="review-static-card">
+        <span class="stars">★★★★★</span>
+        <p>"Super service de qualité, express et fiable. Chauffeur respectueux, sympathique et accueillant. Ce fut un plaisir."</p>
+        <div class="who">SLTROZ23</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RESERVATION -->
+  <section id="reservation">
+    <div class="estimate-box">
+      <h3>💶 Estimation gratuite</h3>
+      <p style="font-size:.88rem;color:var(--slate);">Basée sur la grille tarifaire officielle (région wallonne / commune) affichée dans nos véhicules.</p>
+      <form id="estimate-form" style="margin-top:14px;">
+        <div class="form-row">
+          <div>
+            <label for="est-km">Distance approximative (km)</label>
+            <input id="est-km" type="number" min="1" placeholder="ex: 45" required>
+          </div>
+          <div>
+            <label for="est-trajet">Type de trajet</label>
+            <select id="est-trajet">
+              <option value="aller_retour">Aller-retour (1,70 €/km)</option>
+              <option value="aller_simple">Aller simple (2,50 €/km)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="est-moment">Prise en charge</label>
+            <select id="est-moment">
+              <option value="jour">Jour (3,10 €)</option>
+              <option value="nuit">Nuit (6,20 €)</option>
+            </select>
+          </div>
+          <div>
+            <label for="est-attente">Temps d'attente (heures, optionnel)</label>
+            <input id="est-attente" type="number" min="0" step="0.5" placeholder="ex: 0">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-brass">Estimer le prix</button>
+        </div>
+      </form>
+      <div id="estimate-result">
+        Estimation : <span class="price" id="estimate-price"></span>
+      </div>
+      <div class="estimate-disclaimer">
+        ⚠️ Cette estimation est <strong>indicative et gratuite</strong>, basée sur la grille tarifaire officielle de la région wallonne et de la commune (prise en charge, prix au km, course minimum, pourboire et TVA compris). Le prix réel peut varier selon le trajet exact, la circulation, les péages et les options demandées. Il doit toujours être <strong>confirmé par Taxi Wal</strong> avant la course.
+      </div>
+    </div>
+
+    <div class="booking">
+      <div class="booking-info">
+        <h2 data-i18n="booking_title">Réservez votre trajet</h2>
+        <p data-i18n="booking_lead">Remplissez le formulaire ou contactez-nous directement — réponse rapide garantie.</p>
+        <a href="tel:+32495353594" data-tel class="contact-line">
+          <span class="ico">📞</span><span data-tel-text>0032 495 35 35 94</span>
+        </a>
+        <a href="https://wa.me/32495353594" data-whatsapp target="_blank" rel="noopener" class="contact-line">
+          <span class="ico">
+            <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="16" fill="#25D366"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.06 25.4a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.74.98 1-3.65-.24-.38a9.9 9.9 0 1 1 8.39 4.64zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#fff"/>
+            </svg>
+          </span>WhatsApp
+        </a>
+        <a href="mailto:infotaxiwal@gmail.com?subject=Demande%20de%20course%20-%20Taxi%20Wal" data-mail class="contact-line">
+          <span class="ico">✉️</span><span data-mail-text>infotaxiwal@gmail.com</span>
+        </a>
+      </div>
+      <form id="booking-form">
+        <div class="form-row">
+          <div><label for="nom">Nom et prénom *</label><input id="nom" required></div>
+          <div><label for="tel">Téléphone *</label><input id="tel" type="tel" required></div>
+        </div>
+        <div>
+          <label for="email">Adresse e-mail *</label><input id="email" type="email" required>
+        </div>
+        <div>
+          <label for="depart">Adresse de départ *</label><input id="depart" required>
+        </div>
+        <div>
+          <label for="dest">Destination *</label><input id="dest" required>
+        </div>
+        <div class="form-row">
+          <div><label for="date">Date *</label><input id="date" type="date" required></div>
+          <div><label for="heure">Heure *</label><input id="heure" type="time" required></div>
+        </div>
+        <div class="form-row">
+          <div><label for="passagers">Nombre de passagers *</label><input id="passagers" type="number" min="1" value="1" required></div>
+          <div><label for="bagages">Nombre de bagages *</label><input id="bagages" type="number" min="0" value="0" required></div>
+        </div>
+        <div>
+          <label for="vehicule">Choix de véhicule *</label>
+          <select id="vehicule" required>
+            <option value="">— Sélectionnez —</option>
+            <option value="Peu importe">Peu importe</option>
+            <option value="Renault Trafic (7 places)">Renault Trafic (7 places)</option>
+            <option value="Toyota Corolla Break">Toyota Corolla Break</option>
+            <option value="BMW Série 5">BMW Série 5 (haut de gamme)</option>
+            <option value="Mercedes Classe E">Mercedes Classe E (haut de gamme)</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Message *</label>
+          <textarea id="message" placeholder="Bagages, PMR, événement, aller-retour..." required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-brass">Envoyer la demande</button>
+        </div>
+        <div id="booking-status"></div>
+      </form>
+    </div>
+  </section>
+
+  <div id="fleet-overlay">
+    <div id="fleet-modal">
+      <button id="fleet-close" aria-label="Fermer">✕</button>
+      <h3>🚗 Ma Flotte</h3>
+      <p class="sub">Cliquez sur un véhicule pour voir sa photo, sa description et demander un devis.</p>
+      <div class="fleet-list">
+        <div class="fleet-list-item" data-info-trigger
+             data-title="Renault Trafic"
+             data-desc="Jusqu'à 7 passagers avec bagages : le véhicule idéal pour les familles nombreuses, les groupes d'amis ou les navettes aéroport avec beaucoup de valises. Confortable et spacieux, sans compromis sur la place."
+             data-img="renault-trafic.jpg">
+          <div class="icon">🚐</div>
+          <div>
+            <span class="badge">7 places</span>
+            <h3>Renault Trafic</h3>
+            <p>Idéal pour les familles et les groupes, jusqu'à 7 passagers avec bagages.</p>
+          </div>
+        </div>
+        <div class="fleet-list-item" data-info-trigger
+             data-title="BMW Série 5"
+             data-desc="Confort, standing et élégance pour vos trajets d'affaires, événements ou occasions spéciales. Sièges en cuir, conduite souple, présentation impeccable — pour arriver avec classe."
+             data-img="bmw-serie5.jpg">
+          <div class="icon">🚘</div>
+          <div>
+            <span class="badge">Haut de gamme</span>
+            <h3>BMW Série 5</h3>
+            <p>Confort et standing pour trajets d'affaires ou événements.</p>
+          </div>
+        </div>
+        <div class="fleet-list-item" data-info-trigger
+             data-title="Mercedes Classe E"
+             data-desc="Élégance intemporelle et confort premium pour vos trajets professionnels ou privés. Un choix apprécié pour les rendez-vous d'affaires, les mariages et les transferts haut de gamme."
+             data-img="mercedes-classe-e.jpg">
+          <div class="icon">🚗</div>
+          <div>
+            <span class="badge">Haut de gamme</span>
+            <h3>Mercedes Classe E</h3>
+            <p>Élégance et confort pour vos trajets professionnels ou privés.</p>
+          </div>
+        </div>
+        <div class="fleet-list-item" data-info-trigger
+             data-title="Toyota Corolla Break"
+             data-desc="Le choix polyvalent et économique pour les trajets du quotidien et les navettes aéroport avec bagages. Fiable, confortable et spacieux pour son gabarit."
+             data-img="toyota-corolla.jpg">
+          <div class="icon">🚙</div>
+          <div>
+            <span class="badge">Polyvalent</span>
+            <h3>Toyota Corolla Break</h3>
+            <p>Idéal pour les trajets quotidiens et l'aéroport avec bagages.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="devis-overlay">
+    <div id="devis-modal">
+      <button id="devis-close" aria-label="Fermer">✕</button>
+      <h3>💶 Demande de devis rapide</h3>
+      <p class="sub">Remplissez ce court formulaire, nous vous répondons rapidement par téléphone, WhatsApp ou mail.</p>
+      <form id="devis-form">
+        <div class="form-row">
+          <div><label for="devis-nom">Nom et prénom *</label><input id="devis-nom" name="nom" required></div>
+          <div><label for="devis-tel">Téléphone *</label><input id="devis-tel" name="telephone" type="tel" required></div>
+        </div>
+        <div>
+          <label for="devis-email">Email *</label>
+          <input id="devis-email" name="email" type="email" required placeholder="votre@email.com">
+        </div>
+        <div>
+          <label for="devis-trajet">Trajet *</label>
+          <input id="devis-trajet" name="trajet" required>
+        </div>
+        <div>
+          <label for="devis-vehicule">Véhicule souhaité *</label>
+          <select id="devis-vehicule" name="vehicule" required>
+            <option value="">— Sélectionnez —</option>
+            <option value="Peu importe">Peu importe</option>
+            <option value="Renault Trafic (7 places)">Renault Trafic (7 places)</option>
+            <option value="Toyota Corolla Break">Toyota Corolla Break</option>
+            <option value="BMW Série 5">BMW Série 5 (haut de gamme)</option>
+            <option value="Mercedes Classe E">Mercedes Classe E (haut de gamme)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div><label for="devis-date">Date souhaitée *</label><input id="devis-date" name="date" type="date" required></div>
+          <div><label for="devis-heure">Heure souhaitée *</label><input id="devis-heure" name="heure" type="time" required></div>
+        </div>
+        <div class="form-row">
+          <div><label for="devis-passagers">Nombre de passagers *</label><input id="devis-passagers" name="passagers" type="number" min="1" value="1" required></div>
+          <div><label for="devis-bagages">Nombre de bagages *</label><input id="devis-bagages" name="bagages" type="number" min="0" value="0" required></div>
+        </div>
+        <div>
+          <label for="devis-message">Message *</label>
+          <textarea id="devis-message" name="message" placeholder="Bagages, nombre de passagers, PMR..." required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-brass">Envoyer la demande</button>
+        </div>
+        <div id="devis-status"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="info-overlay">
+    <div id="info-modal">
+      <button id="info-close" aria-label="Fermer">✕</button>
+      <div id="info-visual"></div>
+      <div class="info-body">
+        <h3 id="info-title"></h3>
+        <p id="info-desc"></p>
+        <div class="form-actions">
+          <button type="button" id="info-devis-btn" class="btn btn-brass">Demander un devis</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div id="floating-stack">
+  <a href="mailto:infotaxiwal@gmail.com?subject=Demande%20de%20course%20-%20Taxi%20Wal" class="floating-btn">
+    <span class="floating-bubble">Une question ? <strong>Envoyez un mail</strong></span>
+    <span class="floating-icon mail">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="20" height="16" rx="2" fill="#fff"/>
+        <path d="M3 6l9 6 9-6" stroke="var(--brass)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </a>
+  <a href="https://wa.me/32495353594" data-whatsapp target="_blank" rel="noopener" class="floating-btn">
+    <span class="floating-bubble">Besoin d'aide ? <strong>Parlez-nous</strong></span>
+    <span class="floating-icon wa">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="16" fill="#fff"/>
+        <path d="M23.47 8.52A9.86 9.86 0 0 0 16.06 5.5c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L6 26.5l6.3-1.65a9.9 9.9 0 0 0 9.76-17.33z" fill="#25D366"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.06 25.4a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.74.98 1-3.65-.24-.38a9.9 9.9 0 1 1 8.39 4.64zm5.43-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#fff"/>
+      </svg>
+    </span>
+  </a>
+</div>
+
+<footer>
+  <div class="wrap" style="padding-bottom:14px;font-size:.82rem;line-height:2;">
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Taxi La Louvière</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Taxi Manage</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Navette tout aéroport belge & européen</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Le Rœulx</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Binche</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Morlanwelz</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Chapelle-lez-Herlaimont</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Seneffe</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Houdeng</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Strépy-Bracquegnies</a>
+    <a href="#zone" style="margin-right:14px;text-decoration:underline;">Trivières</a>
+    <a href="#zone" style="text-decoration:underline;">Mons</a>
+  </div>
+  <div class="wrap footer-row">
+    <span style="display:flex;align-items:center;gap:8px;">
+      © 2017 Taxi Wal — La Louvière, Belgique
+    </span>
+    <span><span data-tel-text>0032 495 35 35 94</span> · <span data-mail-text>infotaxiwal@gmail.com</span></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("estimate-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    const km = parseFloat(document.getElementById("est-km").value) || 0;
+    const trajet = document.getElementById("est-trajet").value; // aller_retour | aller_simple
+    const moment = document.getElementById("est-moment").value; // jour | nuit
+    const attenteH = parseFloat(document.getElementById("est-attente").value) || 0;
+
+    const E = CONFIG.estimation;
+    const prise = moment === "nuit" ? E.prise_en_charge_nuit : E.prise_en_charge_jour;
+    const prixKm = trajet === "aller_simple" ? E.prix_km_aller_simple : E.prix_km_aller_retour;
+
+    let total = prise + (km * prixKm) + (attenteH * E.tarif_heure_attente);
+    // Course minimum 2km compris (8,20€) : le total ne peut pas être inférieur à ce minimum
+    if(total < E.course_minimum) total = E.course_minimum;
+
+    document.getElementById("estimate-price").textContent = "≈ " + total.toFixed(2).replace(".", ",") + " €";
+    document.getElementById("estimate-result").style.display = "block";
+  });
+
+  document.getElementById("booking-form").addEventListener("submit", function(e){
+    e.preventDefault();
+    const bookingForm = document.getElementById("booking-form");
+    const bookingStatus = document.getElementById("booking-status");
+    const btn = bookingForm.querySelector("button[type=submit]");
+    btn.disabled = true;
+    bookingStatus.className = "";
+    bookingStatus.textContent = "";
+
+    const params = {
+      name: document.getElementById("nom").value,
+      phone: document.getElementById("tel").value,
+      email: document.getElementById("email").value,
+      depart: document.getElementById("depart").value,
+      arrivee: document.getElementById("dest").value,
+      date: document.getElementById("date").value,
+      heure: document.getElementById("heure").value,
+      vehicule: document.getElementById("vehicule").value,
+      message: "Passagers : " + document.getElementById("passagers").value
+        + ". Bagages : " + document.getElementById("bagages").value
+        + ". Véhicule souhaité : " + document.getElementById("vehicule").value
+        + ". " + document.getElementById("message").value
+    };
+
+    emailjs.send(CONFIG.emailjs_service_id, CONFIG.emailjs_template_id, params, CONFIG.emailjs_public_key)
+      .then(() => {
+        btn.disabled = false;
+        bookingStatus.className = "ok";
+        bookingStatus.textContent = "✅ Merci ! Votre demande a bien été envoyée, nous vous répondons rapidement.";
+        bookingForm.reset();
+      })
+      .catch((err) => {
+        btn.disabled = false;
+        bookingStatus.className = "err";
+        bookingStatus.innerHTML = `⚠️ L'envoi a échoué. Contactez-nous directement par <a href="mailto:${CONFIG.email}" style="text-decoration:underline;">email</a> ou <a href="https://wa.me/${CONFIG.whatsapp_numero}" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a>.<br><small style="opacity:.7;">Détail technique : ${err && err.text ? err.text : JSON.stringify(err)}</small>`;
+      });
+  });
+
+  // ---------- MODALE DEVIS ----------
+  const devisOverlay = document.getElementById("devis-overlay");
+  const devisForm = document.getElementById("devis-form");
+  const devisStatus = document.getElementById("devis-status");
+
+  function openDevis(route, vehicule){
+    devisStatus.className = "";
+    devisStatus.textContent = "";
+    document.getElementById("devis-trajet").value = route || "";
+    document.getElementById("devis-vehicule").value = vehicule || "";
+    devisOverlay.classList.add("open");
+  }
+  function closeDevis(){
+    devisOverlay.classList.remove("open");
+  }
+
+  document.querySelectorAll("[data-devis-trigger]").forEach(el => {
+    el.addEventListener("click", () => openDevis(el.getAttribute("data-route")));
+  });
+  document.getElementById("devis-close").addEventListener("click", closeDevis);
+  devisOverlay.addEventListener("click", (e) => { if(e.target === devisOverlay) closeDevis(); });
+  devisForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    const btn = devisForm.querySelector("button[type=submit]");
+    btn.disabled = true;
+    devisStatus.className = "";
+    devisStatus.textContent = "";
+
+    const params = {
+      name: document.getElementById("devis-nom").value,
+      phone: document.getElementById("devis-tel").value,
+      email: document.getElementById("devis-email").value,
+      depart: document.getElementById("devis-trajet").value,
+      arrivee: document.getElementById("devis-vehicule").value,
+      date: document.getElementById("devis-date").value,
+      heure: document.getElementById("devis-heure").value,
+      vehicule: document.getElementById("devis-vehicule").value,
+      message: "Passagers : " + document.getElementById("devis-passagers").value
+        + ". Bagages : " + document.getElementById("devis-bagages").value
+        + ". " + document.getElementById("devis-message").value
+    };
+
+    emailjs.send(CONFIG.emailjs_service_id, CONFIG.emailjs_template_id, params, CONFIG.emailjs_public_key)
+      .then(() => {
+        btn.disabled = false;
+        devisStatus.className = "ok";
+        devisStatus.textContent = "✅ Merci ! Votre demande de devis a bien été envoyée, nous vous répondons rapidement.";
+        devisForm.reset();
+      })
+      .catch(() => {
+        btn.disabled = false;
+        devisStatus.className = "err";
+        devisStatus.innerHTML = `⚠️ L'envoi a échoué. Contactez-nous directement par <a href="mailto:${CONFIG.email}" style="text-decoration:underline;">email</a> ou <a href="https://wa.me/${CONFIG.whatsapp_numero}" target="_blank" rel="noopener" style="text-decoration:underline;">WhatsApp</a>.`;
+      });
+  });
+
+  // ---------- MODALE INFO (services / flotte) ----------
+  const infoOverlay = document.getElementById("info-overlay");
+  const infoVisual = document.getElementById("info-visual");
+  const infoTitle = document.getElementById("info-title");
+  const infoDesc = document.getElementById("info-desc");
+  const infoDevisBtn = document.getElementById("info-devis-btn");
+  let infoCurrentTitle = "";
+  let infoCurrentIsVehicle = false;
+
+  function openInfo(el){
+    const title = el.getAttribute("data-title");
+    const desc = el.getAttribute("data-desc");
+    const img = el.getAttribute("data-img");
+    const icon = el.getAttribute("data-icon");
+    infoCurrentTitle = title;
+    infoCurrentIsVehicle = !!img;
+
+    if(img){
+      infoVisual.innerHTML = `<div class="info-photo" style="background-image:url('${img}')"></div>`;
+    } else {
+      infoVisual.innerHTML = `<div class="info-icon">${icon || "🚕"}</div>`;
+    }
+    infoTitle.textContent = title;
+    infoDesc.textContent = desc;
+    infoOverlay.classList.add("open");
+  }
+  function closeInfo(){
+    infoOverlay.classList.remove("open");
+  }
+
+  document.querySelectorAll("[data-info-trigger]").forEach(el => {
+    el.addEventListener("click", () => openInfo(el));
+  });
+  document.getElementById("info-close").addEventListener("click", closeInfo);
+  infoOverlay.addEventListener("click", (e) => { if(e.target === infoOverlay) closeInfo(); });
+
+  // ---------- FENÊTRE MA FLOTTE ----------
+  const fleetOverlay = document.getElementById("fleet-overlay");
+  document.getElementById("fleet-open-trigger").addEventListener("click", () => {
+    fleetOverlay.classList.add("open");
+  });
+  document.querySelectorAll(".open-fleet-link").forEach(el => {
+    el.addEventListener("click", (e) => { e.preventDefault(); fleetOverlay.classList.add("open"); });
+  });
+  document.getElementById("fleet-close").addEventListener("click", () => {
+    fleetOverlay.classList.remove("open");
+  });
+  fleetOverlay.addEventListener("click", (e) => { if(e.target === fleetOverlay) fleetOverlay.classList.remove("open"); });
+  document.querySelectorAll("#fleet-modal [data-info-trigger]").forEach(el => {
+    el.addEventListener("click", () => fleetOverlay.classList.remove("open"));
+  });
+
+  infoDevisBtn.addEventListener("click", () => {
+    closeInfo();
+    if(infoCurrentIsVehicle){
+      openDevis("", infoCurrentTitle);
+    } else {
+      openDevis(infoCurrentTitle, "");
+    }
+  });
+
+  // ---------- DIAPORAMA HERO ----------
+  const heroPhotos = [
+    "flotte-groupe.jpg",
+    "hero-2.jpg",
+    "hero-3.jpg",
+    "hero-4.jpg",
+    "bmw-serie5.jpg",
+    "mercedes-classe-e.jpg",
+    "renault-trafic.jpg"
+  ];
+  const heroContainer = document.getElementById("hero-slides");
+  if(heroContainer){
+    heroPhotos.forEach((src, i) => {
+      const div = document.createElement("div");
+      div.className = "hero-slide" + (i === 0 ? " active" : "");
+      div.style.backgroundImage = `url('${src}')`;
+      heroContainer.appendChild(div);
+    });
+    const slides = heroContainer.querySelectorAll(".hero-slide");
+    let heroIndex = 0;
+    setInterval(() => {
+      slides[heroIndex].classList.remove("active");
+      heroIndex = (heroIndex + 1) % slides.length;
+      slides[heroIndex].classList.add("active");
+    }, 2800);
+  }
+</script>
+
+</body>
+</html>
