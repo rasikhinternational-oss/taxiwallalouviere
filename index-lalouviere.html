@@ -258,16 +258,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = form.querySelector("button[type=submit]");
     btn.disabled = true; status.className=""; status.textContent="";
 
+    const clientEmail = document.getElementById("email").value;
+
     const params = {
       name: document.getElementById("nom").value,
       phone: document.getElementById("tel").value,
-      email: document.getElementById("email").value,
+      email: clientEmail,
+      reply_to: clientEmail,
       depart: document.getElementById("depart").value,
       arrivee: document.getElementById("dest").value,
       date: document.getElementById("date").value,
       heure: document.getElementById("heure").value,
       vehicule: document.getElementById("vehicule").value,
-      message: "Passagers : " + document.getElementById("passagers").value
+      message: "Email client : " + clientEmail
+        + ". Passagers : " + document.getElementById("passagers").value
         + ". Bagages : " + document.getElementById("bagages").value
         + ". Véhicule souhaité : " + document.getElementById("vehicule").value
         + ". " + document.getElementById("message").value
