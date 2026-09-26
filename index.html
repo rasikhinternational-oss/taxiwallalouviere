@@ -159,7 +159,7 @@ function gtag_report_conversion(url) {
   .side-accordion .side-accordion-content .btn{width:100%;justify-content:center;}
   .side-menu-sub-head{font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green);margin:16px 0 4px;}
 
-
+  .hero{
     position:relative;padding:60px 16px 40px;text-align:center;
     overflow:hidden;border-bottom:1px solid var(--line);
   }
@@ -185,6 +185,35 @@ function gtag_report_conversion(url) {
   }
   .btn-primary{background:var(--red);color:#fff;}
   .btn-outline{background:transparent;color:var(--text);border:1px solid var(--line);}
+
+  /* ---------- BLOC "RÉSERVEZ VIA L'APP" ---------- */
+  .app-promo{
+    max-width:720px;margin:26px auto 4px;padding:30px 20px 26px;text-align:center;
+    background:linear-gradient(160deg,#2a1716 0%,#1a2019 100%);
+    border:1px solid var(--line);border-radius:24px;
+  }
+  .app-icon{
+    width:140px;height:140px;border-radius:32px;margin:0 auto 18px;object-fit:cover;
+    box-shadow:0 12px 34px rgba(200,16,46,.38), 0 0 0 5px rgba(255,255,255,.07);
+  }
+  .app-promo h2{font-size:1.75rem;line-height:1.25;margin-bottom:8px;}
+  .app-promo .app-sous{color:var(--muted);max-width:470px;margin:0 auto 18px;font-size:.95rem;}
+  .app-avantages{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px;}
+  .app-avantages span{
+    background:rgba(255,255,255,.06);border:1px solid var(--line);
+    border-radius:999px;padding:6px 12px;font-size:.8rem;
+  }
+  .btn-app{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    background:var(--red);color:#fff;font-weight:800;font-size:1.15rem;
+    padding:17px 32px;border-radius:999px;width:100%;max-width:380px;
+    box-shadow:0 8px 24px rgba(200,16,46,.42);
+  }
+  .app-note{margin-top:12px;font-size:.78rem;color:var(--muted);}
+  .footer-app{
+    display:inline-block;margin-bottom:12px;background:var(--red);color:#fff;
+    font-weight:700;padding:10px 18px;border-radius:999px;font-size:.88rem;
+  }
 
   section{padding:28px 16px;max-width:1100px;margin:0 auto;}
   .eyebrow{
@@ -295,6 +324,8 @@ function gtag_report_conversion(url) {
 
   @media(max-width:600px){
     .form-row{grid-template-columns:1fr;}
+    .app-promo{margin:18px 12px 4px;}
+    .app-promo h2{font-size:1.5rem;}
   }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -330,6 +361,7 @@ function gtag_report_conversion(url) {
   </div>
   <div class="side-menu-body">
     <a href="#" class="side-link" data-close-menu>🏠 Taxi Wal La Louvière — Accueil</a>
+    <a href="https://rasikhinternational-oss.github.io/taxiwal-chauffeur/client.html" class="side-link" style="color:var(--red);">📲 Réserver via l'app Taxi Wal</a>
 
     <details class="side-accordion">
       <summary>✈️ Navette Aéroport</summary>
@@ -379,11 +411,27 @@ function gtag_report_conversion(url) {
     <h1>Taxi Wal La Louvière — <span>Navette Aéroport</span> & Chauffeur privé, quand vous en avez besoin</h1>
     <p>Navette aéroport, trajets sur mesure, entreprises et événements. Véhicules confortables, chauffeurs professionnels, disponibles 24h/24 — 7j/7 sur La Louvière et tout le Centre.</p>
     <div class="hero-ctas">
-      <a href="#reservation" class="btn btn-primary">Réserver une course</a>
+      <a href="#app" class="btn btn-primary">📲 Réserver via l'app</a>
+      <a href="#reservation" class="btn btn-outline">Réserver une course</a>
       <a href="https://wa.me/32495353594" class="btn btn-outline">WhatsApp direct</a>
     </div>
   </div>
 </section>
+
+<!-- ---------- RÉSERVEZ VIA L'APP ---------- -->
+<div class="app-promo" id="app">
+  <img src="logo-hero.jpg" alt="Application Taxi Wal" class="app-icon">
+  <h2>Réservez via l'app Taxi Wal</h2>
+  <p class="app-sous">Le plus simple et le plus rapide : réservez en quelques secondes, recevez votre prix et suivez votre course directement sur votre téléphone.</p>
+  <div class="app-avantages">
+    <span>💶 Prix confirmé avant le départ</span>
+    <span>📍 Suivi de votre chauffeur</span>
+    <span>🔔 Notifications en direct</span>
+    <span>🧾 Historique de vos trajets</span>
+  </div>
+  <a href="https://rasikhinternational-oss.github.io/taxiwal-chauffeur/client.html" class="btn-app">📲 Réserver via l'app</a>
+  <p class="app-note">Fonctionne sur tous les téléphones, sans rien installer. Bientôt disponible sur l'App Store et Google Play.</p>
+</div>
 
 <section>
   <div class="eyebrow">Pourquoi nous choisir</div>
@@ -402,7 +450,7 @@ function gtag_report_conversion(url) {
     <div class="card" onclick="this.classList.toggle('open')">
       <div class="card-icon">📱</div>
       <div class="card-title">Réservation pratique</div>
-      <div class="card-desc">En ligne, par téléphone ou WhatsApp.</div>
+      <div class="card-desc">Via l'app Taxi Wal, en ligne, par téléphone ou WhatsApp.</div>
     </div>
     <div class="card" onclick="this.classList.toggle('open')">
       <div class="card-icon">⏱️</div>
@@ -486,7 +534,8 @@ function gtag_report_conversion(url) {
   <div class="eyebrow">Réservation</div>
   <h2>Réservez votre trajet</h2>
   <div class="booking">
-    <p style="color:var(--muted);margin-bottom:20px;text-align:center;">Remplissez le formulaire ou contactez-nous directement — réponse rapide garantie, 24h/24, 7j/7.</p>
+    <p style="color:var(--muted);margin-bottom:12px;text-align:center;">Remplissez le formulaire ou contactez-nous directement — réponse rapide garantie, 24h/24, 7j/7.</p>
+    <p style="text-align:center;margin-bottom:20px;"><a href="https://rasikhinternational-oss.github.io/taxiwal-chauffeur/client.html" style="color:var(--red);font-weight:700;text-decoration:underline;">📲 Encore plus rapide : réservez via l'app Taxi Wal</a></p>
     <form id="booking-form">
       <div class="form-row">
         <div><label for="ll-nom">Nom et prénom</label><input id="ll-nom" required></div>
@@ -519,6 +568,7 @@ function gtag_report_conversion(url) {
 </section>
 
 <footer>
+  <a href="https://rasikhinternational-oss.github.io/taxiwal-chauffeur/client.html" class="footer-app">📲 Réservez via l'app Taxi Wal</a>
   <p>© 2026 Taxi Wal — La Louvière, Belgique · 0032 495 35 35 94 · infotaxiwal@gmail.com</p>
 </footer>
 
